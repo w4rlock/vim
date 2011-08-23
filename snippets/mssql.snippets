@@ -1,0 +1,126 @@
+snippet exc
+snippet sel
+	-- -----------------------------------------------
+	SELECT ${1:campo1}, 
+		   ${2:campo2},
+		   ${3:campo3}
+	  FROM ${4:tabla}
+	 WHERE ${5:condicion}
+	-- -----------------------------------------------
+snippet sele
+	-- -----------------------------------------------
+	SELECT ${1:campo1}, 
+		   ${2:campo2},
+		   ${3:campo3}
+	  FROM ${4:tabla1} AS ${5:t1} 
+	  JOIN ${6:tabla2} AS ${7:t2} ON $5.${8:id} = $7.${9:$8}
+	  
+	 WHERE ${10:condicion}
+	       AND ${11:campo} = ${12:valor}
+	       AND ${13:campo} = ${14:valor}
+	-- -----------------------------------------------
+snippet selec
+	-- -----------------------------------------------
+	SELECT ${1:campo1}, 
+		   ${2:campo2},
+		   ${3:campo3}
+	  FROM ${4:tabla1} AS ${5:t1} 
+	  JOIN ${6:tabla2} AS ${7:t2} ON $5.${8:id} = $7.${9:$8}
+	  
+	 WHERE ${10:condicion}
+	       AND ${11:campo} = ${12:valor}
+	       AND ${13:campo} = ${14:valor}
+	 GROUP BY ${15:campo1}
+	 ORDER BY ${16:campo1} DESC ${17}
+	-- -----------------------------------------------
+snippet gro
+	GROUP BY ${1:campo} ${2}
+snippet gb
+	GROUP BY ${1:campo} ${2}
+snippet hav 
+	HAVING (${1:condicion}) ${2}
+snippet ord
+	ORDER BY ${1:campo1} ${2}
+snippet ob
+	ORDER BY ${1:campo1} ${2}
+snippet di
+	DISTINCT
+snippet tr
+	TRIM(${1:campo}), ${2}
+snippet rt
+	RTRIM(${1:campo}), ${2}
+snippet lt
+	LTRIM(${1:campo}), ${2}
+snippet ma
+	MAX(${1:campo}) ${2}
+snippet nv
+	NVARCHAR(${1:50}), ${2}	
+snippet if
+	IF ${1:condition} THEN
+		${2:--cod3a}
+	END IF;
+snippet elif
+	ELSIF ${1:condition} THEN
+		${2:--cod3a}
+snippet be
+	BETWEEN ${1:1} AND ${2:90} ${3}
+snippet li
+	LIKE '%${1:dato}%' ${2}
+snippet in
+	IN ('${1:a}','${2:b}','${3:c}') $4
+snippet ins
+	-- -----------------------------------------------
+	INSERT INTO ${1:tabla} 
+	VALUES (${2:valor1},${3:valor2},${4:valor3},${5:valor5}) 
+	${6}
+	-- -----------------------------------------------
+snippet upd
+	-- -----------------------------------------------
+	UPDATE ${1:table}
+	SET ${2:campo1} = ${3:valor1}, 	
+		${4:campo2} = ${5:valor2},
+		${6:campo3} = ${7:valor4}
+	WHERE ${8:condicion}
+	-- -----------------------------------------------
+snippet del
+	-- -----------------------------------------------
+	DELETE ${1:table}
+	WHERE  ${2:condicion}
+	-- -----------------------------------------------
+snippet cta
+	-- --------------------------------------------------------------------- `strftime("%d/%m/%Y")`
+	CREATE TABLE ${1:nombre_tabla}
+		 ( 
+			${2:id}           ${3:INT} 	      ${4:PRIMARY KEY IDENTITY}, 
+			${5:campo2}       ${6:NVARCHAR}(${7:50})     		${8:NULL}, 
+			${9:campo3}       ${10:NVARCHAR}(${11:50})     		${12:NULL}, 
+			${13:campo4}       ${14:NVARCHAR}(${15:50}) 	    	${16:NULL}
+		 )
+	GO
+	-- -------------------------------------------------------------------------------
+snippet csp
+	-- --------------------------------------------------------------------- `strftime("%d/%m/%Y")`
+	CREATE PROCEDURE [dbo].[SP_${1:miprocedimiento}]
+	-- (@${2:p_id} 			${3:INT},
+	-- @${4:p_nom} 			${5:NVARCHAR(50)},
+	-- @${6:p_ape} 			${7:NVARCHAR(50))}
+	AS
+	BEGIN
+		${8:-- TRANSACCIONES}
+	END
+	-- -------------------------------------------------------------------------------
+snippet exec
+	-- MS SQL
+	-- -------------------------------------------------------------------------------
+	--USE [${1:BasedeDatos}]
+	GO
+	DECLARE	@return_value int
+	-- Parametros requeridos
+	EXEC	@return_value = [dbo].[${2:SP_storedname}]
+			${3:-- @descripcion} = N'${4:xxxxxxxxxxx}',
+			${5:-- @user_id} 	= ${6:22},
+			${7:-- @user_type} 	= ${8:13}
+
+	SELECT	'Return Value' = @return_value
+	GO
+	-- -------------------------------------------------------------------------------

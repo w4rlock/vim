@@ -1,0 +1,9 @@
+snippet if
+	if (${1:/* conditi0n */){
+		// cod3a
+	}
+
+snippet for
+	for (int i=0; i < ${1:var}; i++){
+		// cod3a
+	}

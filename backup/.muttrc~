@@ -1,0 +1,94 @@
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+set from="warlock.gpl@gmail.com"         #Configurar su dirección en el FROM
+set realname="h3chiZer0"
+
+#set imap_user = "warlock.gpl@gmail.com"
+#set imap_pass = "514CKW4R33NCRIP74D0"
+#set folder = "imaps://imap.gmail.com:993"
+#set spoolfile = "+INBOX"
+
+set pager_context=1
+set pager_index_lines=6                 #Muestra un mini-índice en el paginador
+set menu_scroll
+set pgp_verify_sig=yes                  #No muestra PGP en el paginador
+set status_on_top                       #Coloca la línea de estado en la parte superior
+set read_inc=25                         # show progress when reading a mailbox
+
+hdr_order From: Date: To: Cc: Subject:  # Orden de las cabeceras
+#set sort=threads                       #Ordena según hilos de mensajes en el índice
+set sort_aux=date-received
+set sort=reverse-date-received
+
+#set pager_format="%-10.10i %[!%a %b %d %R]"
+#set status_format="Mutt --*-- <%f> [%M/%m] [N=%n,*=%t,post=%p,new=%b]"
+#
+set index_format="%4C %Z %{%b %d} %-20.20L (%4l) %s"
+set status_format='-%r-GMail: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p?  Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'
+set pager_format='-%Z-GMail %C/%m: %-20.20n %s'<enter>:set compose_format='-- GMail: Compose [Approx. msg size: %l Atts: %a]%>-'
+
+set status_on_top               # some people prefer the status bar on top
+set folder_format="%2C %t %8s %d %N %f" #set date_format="!%H:%M %a %d %b     "
+set date_format = "%d/%m/%y %H:%M"
+
+set mailcap_path= ~/.mutt/mailcap #visualizar html en mutt con lynx
+set alias_file=~/.mutt/aliases
+set sendmail="/usr/bin/msmtp"   
+
+macro   compose \CP     "Fgpg --clearsign\ny"
+macro   compose \CS     "Fgpg --clearsign\ny^T^Uapplication/pgp; format=text; x-action=sign\n"
+
+# ++++++++++++++++++++++++ Chequeamos correos cada 60 segundos +++++++++++++
+set check_new
+set mail_check=12
+set beep_new
+
+# ++++++++++++++++++++++++++++++++++++++++++ Folders +++++++++++++++++++++++
+set mbox_type=Maildir
+set mbox="~/mail"
+set folder = "$HOME/mail"
+set record="+Sent"            			#El correo enviado se guarda aquí
+set postponed="+Postponed"   			# Where to store draft messages
+set spoolfile ="+/Default"
+set move=no                  			# Don't move mail from spool
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+set attribution="Buenas %v...\nDecías, el %d:\n" # Como van ha comenzar los mensajes de respuesta:
+set include=yes                         #Citar el mensaje original al responder
+set fast_reply=yes                      #Responder sin pedir confirmación
+set beep=no                             #Desactivar el sonido
+set markers=no                          #No colocar el símbolo + en las líneas con retorno automático
+set confirmappend=no                    #Guardar a =keep sin pedir confirmación
+set to_chars=" +TCF"                    #No usar la tecla L para mail_list
+set postpone = ask-yes
+set pager_stop					     	#No saltar al siguiente mail cuando llegamos al final del actual
+set copy= yes 							# Guardar una copia de los mensajes enviados en...
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+save-hook .* =Keep                      #El buzón por defecto para guardar el correo es =keep #subscribe gentoo-user gentoo-dev       #Se está subscrito a estas listas de correo
+
+bind pager h display-toggle-weed        #Ver los encabezados con la tecla h
+
+# Simula el antiguo menú de URL
+macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
+macro pager \cb |urlview\n 'call urlview to extract URLs out of a message'
+
+#Ejecuta fetchmail al presionar la tecla G
+macro index G "!fetchmail -a -m 'procmail -d %T'\r"
+macro pager G "!fetchmail -a -m 'procmail -d %T'\r"
+
+#Macros para editar .muttrc y aplicar los cambios sin necesidad de reiniciar el programa
+macro generic ,sm ":source $HOME/.muttrc\r"
+macro generic \cj "!urxvt -e vim $HOME/.muttrc\r"
+
+source "~/.mutt/sidebar"           
+source "~/.mutt/colors"           
+source "~/.mutt/aliases"
+source "~/.mutt/mailboxes"
+source "~/.mutt/groups"
+source "~/.mutt/gpg"
+
+
+macro generic "<F3>" ":set from='accept1984@gmail.com'<enter>:set status_format='-%r-GMail: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p?  Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'<enter>:set pager_format='-%Z-GMail %C/%m: %-20.20n %s'<enter>:set compose_format='-- GMail: Compose [Approx. msg size: %l Atts: %a]%>-'<enter>
+macro generic "<F4>" ":set from='warlock.gpl@gmail.com'<enter>:set status_format='-%r-GMail: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p?  Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'<enter>:set pager_format='-%Z-GMail %C/%m: %-20.20n %s'<enter>:set compose_format='-- GMail: Compose [Approx. msg size: %l Atts: %a]%>-'<enter>
+#macro generic "<F3>" ":set from='foo.bar@gmail.com'<enter>:set status_format='-%r-GMail: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p?  Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'<enter>:set pager_format='-%Z-GMail %C/%m: %-20.20n %s'<enter>:set compose_format='-- GMail: Compose [Approx. msg size: %l Atts: %a]%>-'<enter>:unset mbox<enter>:unset pop_delete<enter>:unset pop_host<enter>:unset pop_user<enter>:unset pop_pass<enter>:set header_cache='~/.gmail/cache/headers'<enter>:set message_cachedir='~/.gmail/cache/bodies'<enter>:set folder='imaps://imap.gmail.com:993'<enter>:set postponed='+[Gmail]/Drafts'<enter>:set record='+[Gmail]/Sent Mail'<enter>:set spoolfile='+INBOX'<enter>:set imap_user='foo.bar@gmail.com'<enter>:set imap_pass='pA$$wd'<enter>:set move=no<enter>"
+# Para leer un msj con imagenes (w3m presionar v sobre el msj 2 veces)

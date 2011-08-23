@@ -1,0 +1,101 @@
+set signature = ~/.mutt/gpgfirma
+#set pgp_autoencrypt
+set pgp_timeout=1800
+set pgp_sign_as="0x5201D7B0"
+set pgp_autosign = yes  # Automatically digitally sign my emails with PGP/GPG
+set pgp_verify_sig=yes  # verificar firmas entrantes
+
+set pgp_decode_command = "gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
+set pgp_verify_command = "gpg --no-verbose --batch --output - --verify %s %f"
+set pgp_decrypt_command = "gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
+set pgp_sign_command = "gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --detach-sign --textmode %?a?-u %a? %f"
+set pgp_clearsign_command = "gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
+set pgp_encrypt_only_command = "/usr/bin/pgpewrap gpg -v --batch --output - --encrypt --textmode --armor --always-trust -- -r %r -- %f"
+set pgp_encrypt_sign_command = "/usr/bin/pgpewrap gpg --passphrase-fd 0 -v --batch --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust -- -r %r -- %f"
+set pgp_import_command = "gpg --no-verbose --import -v %f"
+set pgp_export_command = "gpg --no-verbose --export --armor %r"
+set pgp_verify_key_command = "gpg --no-verbose --batch --fingerprint --check-sigs %r"
+set pgp_list_pubring_command = "gpg --no-verbose --batch --with-colons --list-keys %r" 
+set pgp_list_secring_command = "gpg --no-verbose --batch --with-colons --list-secret-keys %r" 
+set pgp_getkeys_command = ""
+set pgp_good_sign="`gettext -d gnupg -s 'Good signature from "' | tr -d '"'`"
+
+#set pgp_encryptself # guardar una copia cifrada de todos los mensajes que se envíen cifrados (precisa de la variable de configuración general set copy=yes).
+
+set pgp_replysign # al responder a un mensaje firmado, requerir que el mensaje de respuesta sea también firmado.
+set pgp_replyencrypt # al responder a un mensaje cifrado, requerir que nuestra respuesta también vaya cifrada. 
+
+--qDbXVdCdHGoSgWSk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+aca va
+--=20
+//Marcelo
+
+--qDbXVdCdHGoSgWSk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=crypto
+Content-Transfer-Encoding: quoted-printable
+
+set pgp_decode_command=3D"gpg %?p?--passphrase-fd 0? --no-verbose --batch -=
+-output - %f"
+set pgp_verify_command=3D"gpg --no-verbose --batch --output - --verify %s %=
+f"
+set pgp_decrypt_command=3D"gpg --passphrase-fd 0 --no-verbose --batch --out=
+put - %f"
+set pgp_sign_command=3D"gpg --no-verbose --batch --output - --passphrase-fd=
+ 0 --armor --detach-sign --textmode %?a?-u %a? %f"
+set pgp_clearsign_command=3D"gpg --no-verbose --batch --output - --passphra=
+se-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
+set pgp_encrypt_only_command=3D"pgpewrap gpg --batch --quiet --no-verbose -=
+-output - --encrypt --textmode --armor --always-trust --encrypt-to 0x4EB5FE=
+12 -- -r %r -- %f"
+set pgp_encrypt_sign_command=3D"pgpewrap gpg --passphrase-fd 0 --batch --qu=
+iet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor =
+--always-trust --encrypt-to 0xC9C40C31 -- -r %r -- %f"
+set pgp_import_command=3D"gpg --no-verbose --import -v %f"
+set pgp_export_command=3D"gpg --no-verbose --export --armor %r"
+set pgp_verify_key_command=3D"gpg --no-verbose --batch --fingerprint --chec=
+k-sigs %r"
+set pgp_list_pubring_command=3D"gpg --no-verbose --batch --with-colons --li=
+st-keys %r"=20
+set pgp_list_secring_command=3D"gpg --no-verbose --batch --with-colons --li=
+st-secret-keys %r"=20
+
+# specify the uid to use when encrypting/signing
+set pgp_sign_as=3D0x4EB5FE12
+
+# this set the number of seconds to keep in memory the passpharse used to e=
+ncrypt/sign
+# the more the less secure it will be
+set pgp_timeout=3D60
+
+# it's a regexp used against the GPG output: if it matches some line of the=
+ output
+# then mutt considers the message a good signed one (ignoring the GPG exit =
+code)
+set pgp_good_sign=3D"^gpg: Good signature from"
+
+# mutt uses by default PGP/GPG to sign/encrypt messages
+# if you want to use S-mime instead set the smime_is_default variable to yes
+
+# automatically sign all outcoming messages
+set crypt_autosign
+# sign only replies to signed messages
+#set crypt_replysign
+
+# automatically encrypt outcoming messages
+#set crypt_autoencrypt=3Dyes
+# encrypt only replies to signed messages
+#set crypt_replyencrypt=3Dyes
+# encrypt and sign replies to encrypted messages
+set crypt_replysignencrypted=3Dyes
+
+# automatically verify the sign of a message when opened
+set crypt_verify_sig=3Dyes
+
+set pgp_autoinline
+
+--qDbXVdCdHGoSgWSk--

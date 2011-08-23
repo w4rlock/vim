@@ -1,0 +1,260 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- SELECCIONAR
+V}
+V{
+gv: Selecciona el bloque anterior.
+V8j
+V8k
+V8L
+V8H
+ggVG
+
+Seleccionar por palabras
+vw
+ve
+v3w
+v3e
+Sin tener en cuenta los puntos
+v3W
+v3E
+
+Seleccionar hacia atras
+vb
+vge
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- EDITAR
+
+`0  abre el ultimo archivo editado
+`1  abre el ante ultimo archivo editado
+g;  muestra la ultima modificacion del archivo
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- BUSQUEDA
+PLUGIN: SearchComplete
+Ej: Si queremos buscar la palabra screen
+/scre + <tab>
+
+BUSCAR
+Muestra en un split las lineas donde aparece "algo"
+:g/algo/#  
+
+REEMPLAZAR
+:%s/antes/despues/gc  
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- ORDENAR
+:sort n: ordena numeros
+:sort!: ordena al reves
+:%sort u: ordena removiendo linea duplicadas
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- DICCIONARIOS
+1-Escribir una lista de palabras en un archivo. Ej: python.list
+2-:set dictionary=python.list
+3-<C-X><C-K>: abre el INTELLISENSE de palabras que hiso matchin
+3-<C-X><C-L>: Completa la linea.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- INSERTAR
+:r otroFile.txt: inserta otro archivo abajo del cursor
+:r! date       : inserta la salida de un comando.
+gf : inserta el archivo situado debajo del cursor
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- REDIMENSIONAR
+SPLITS
+9<C-W><
+9<C-W>>
+<C-W>=: iguala todas los splits
+<C-W>_: maximiza el split
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- IDENTAR
+==: reformatea la linea actual
+gq: reformatea un parrafo
+gg=G: identa todo el documento
+<}
+>{
+>>
+4>>: identa las 4 linea de abajo.
+>4k: identa las 4 linea de arriba.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- COPIAR
+yy20p: copia la linea actual y la pega 20 veces
+5yk: copia las 5 lineas de arriba
+y5y: copia las 5 lineas de abajo
+5yy: copia las 5 lineas de abajo
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- ELIMINAR
+da} : Borra un bloque de codigo entre llaves.
+di} : Borra un bloque de codigo dejando las llaves.
+d5d: elimina las 5 lineas de abajo.
+d5k: elimina las 5 lineas de arriba.
+d}:  elimina el bloque de abajo.
+d{: elimina el bloque de arriba.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- INTELLISENSE
+<C-X>
+	<C-L>: Completa la linea
+	<C-F>: Completa el path
+	<C-O>: Muestra el menu con todos los resultados.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- MOVIMIENTOS
+set rnu: la linea situada por el cursor siempre va a ser 0
+ge: vuelve al final de la palabra anterior
+fx: busca la letra x en la linea hacia adelante
+Fx: busca la letra x en la linea hacia atras
+w:  mueve de palabra hasta un .
+W:  mueve de palabra ignorando .
+e:  mueve hasta el fin de la palabra
+E:  mueve hasta el fin de la palabra ignorando .
+}:  mueve entre bloques
+{:  mueve entre bloques
+gd: nos mueve a la declaracion de la variable donde esta situado el cursor.
+g,: nos mueve a la ultima linea modidicada
+g;: nos mueve a la ultima linea modidicada hacia adelante.
+3j: baja 3 lineas.
+3k: sube 3 lineas
+M: nos mueve al medio de la pantalla
+3w: nos mueve 3 palabras.
+3b: retrocede 3 palabras.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- FOLDINGS
+# folding : hide sections to allow easier comparisons
+
+zf{motion} or {Visual}zf :Operator to create a fold.
+zf'a : fold to mark
+zF :Create a fold for N lines.
+zd :Delete one fold at the cursor.
+zD :Delete folds recursively at the cursor.
+zE :Eliminate all folds in the window.
+zo :Open one fold.
+zO :Open all folds recursively.
+zc :Close one fold.
+zC :Close all folds recursively.
+za :When on a closed fold: open it.and vice-versa.
+zA :When on a closed fold: open it recursively.and vice-versa.
+zR :Open all folds.
+zM :Close all folds:
+zn :Fold none: reset 'foldenable'. All folds will be open.
+zN :Fold normal: set 'foldenable'. All folds will be as they were before.
+zi :Invert 'foldenable'.
+
+[z :Move to the start of the current open fold.
+]z :Move to the end of the current open fold.
+zj :Move downwards. to the start of the next fold.
+zk :Move upwards to the end of the previous fold.
+
+nmap <F6> /}<CR>zf%<ESC>:nohlsearch<CR>
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- BASE DE DATOS
+Plugin: dbext.vim, SQLUtilities.vim, sql.vim, sqlanywhere.vim
+
+EJEMPLOS:
+		1- Seleccionar datos de una tabla
+		   1.1- Escribir el nombre de la tabla ej "persona;"
+		   1.2- Seleccionar la linea (shift + v)
+		   1.3- \st
+		2- Seleccionar datos de una table con clau. "where"
+		   2.1- Escribir el nombre de la tabla ej "persona;"
+		   2.2- Seleccionar la linea (shift + v)
+		   2.3- \stw (ingresar la clausula del where)
+		3- Seleccionar datos de una table
+		   3.1- \sta (ingresar el nombre de la tabla)
+		4- Ejecutar una Query
+		   4.1- Escribir la Query (delete, select, update, insert)
+		   4.2- Seleccionar la Query
+		   4.3- \se
+		5- Describir una tabla (muestra tipo de columnas)
+		   5.1- Escribir la tabla
+		   5.2- Seleccionar la tabla
+		   5.3- \sdt
+		6- Describir una tabla preguntando (ask)
+		   6.1- \sdta
+		7- Describir un Store Procedure
+		   7.1- Escribir el nombre del Store Procedure
+		   7.2- \sdp
+		8- Describir un Store Procedure preguntando
+		   8.1- \sdpa
+		9- Ver todas las tablas
+		   9.1- \slt
+		10- Ver todos los Stores Procedures
+		   10.1- \slp	
+		11- Autocompletado de tablas
+			11.1- :DBCompleteTables
+			11.2- Select * From <ctrl+x> <ctrl+k>
+
+SQLUtilities.vim
+        1- Crear una tabla.
+        2- SQLUCreateProcedure + nombretabla
+
+CONFIGURACION:
+en el .VIMRC
+let g:dbext_default_profile_mysql_local = 'type=MYSQL:user=root:passwd=XXXXXXXXXXXXXXXXX:dbname=CarritoCompras:extra=-t'
+
+OPCIONAL:
+vim-sql_iabbr en AUR: para palabras claves en mayusculas
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- TAGLIST F9
+ctrl + t: va a la definincion del metodo
+gd: susbraya la variable
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- NERDTREE F8
+o: abrir el archivo en la ventana actual
+t: abrirlo en un tab
+i: abrirlo en un split
+s: abrirlo en un vsplit
+
+I: mostrar archivos ocultos
+
+Shift + a: nerdtree modo completo
+Shift + j: baja al ultimo nodo
+Shift + k: sube al primer nodo
+
+OPCIONAL: nerdcommenter
+		  ,cs: comentar una linea o bloque
+		  ,cc: comentar una linea
+		  ,cu: descomentar una linea o bloque
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- MARCADORES
+Dependencia: NERDTree
+Usage:
+		1-  Poner el cursor en una carpeta
+		2- :BookMark dir1
+		   :BookMark dao
+		   :BookMark dto
+		3- :BoolMarkToRoot dao
+
+mk      - mark current position (can use a-z)
+'k      - move to mark k
+d'k     - delete from current position to mark k
+'a-z    - same file
+'A-Z    - beteween files
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- BUFFERS
+Plugin: tabbar.vim
+Usage:
+		Alt + 1: archivo en el buffer 1
+		Alt + 2: archivo en el buffer 2
+
+Ejecutar: vim .bashrc .Xdefaults .bash_history 
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- PLUGINS
+vim-matchit "hace matching con el parentesis llaves.
+vim-showmarks "muestra de marcadores
+bccalc.vim "evalua expresiones matematicas, seleccionar ;bc
+hmm.vim "VIM + GnuPG
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- ATAJOS
+<C-w> n: crea una nueva ventana (split)
+<C-w> s: hace un split de la ventana actual
+<C-w> v: hace un vsplit de la ventana actual
+ n: crea una nueva ventana
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- IDES
+vim-lua-support
+vim-bash-support
+vim-perl
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- ALIGN
+Plugin: align.vim
+Usage:
+		1- Seleccionar un bloque de codigo
+		2- :'<,'>Align =
+		2- :2,20Align =
+		2- :AlignCtrl lr
+		3- Alinear comentarios
+			3.1- Seleccionar el comentario
+			3.2- \ACOM

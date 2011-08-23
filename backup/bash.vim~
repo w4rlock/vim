@@ -1,0 +1,6 @@
+"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= BASH
+let s:BASH_AuthorName = 'w4rlock'
+let s:BASH_Email = 'warlock.gpl@gmail.com'
+
+set dictionary=$HOME/.vim/wordlists/bash.list
+

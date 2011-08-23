@@ -1,0 +1,677 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using clsDatos;
+
+namespace clsNegocios
+{
+    public class clsUser
+    {
+        int user_id;
+        string user_firstname;
+        string user_surname;
+        string user_sex;
+        string user_mail;
+        int user_type_id;
+        string user_type_name;
+
+        public string User_type_name
+        {
+            get { return user_type_name; }
+            set { user_type_name = value; }
+        }
+        string user_address;
+        string user_login_name;
+        string user_password;
+        string user_tel;
+        DateTime user_last_login;
+        int user_state;
+        string user_url;
+
+        public string User_url
+        {
+            get { return user_url; }
+            set { user_url = value; }
+        }
+        public DateTime User_last_login
+        {
+            get { return user_last_login; }
+            set { user_last_login = value; }
+        }
+        public int User_state
+        {
+            get { return user_state; }
+            set { user_state = value; }
+        }
+        public int User_id
+        {
+            get { return user_id; }
+            set { user_id = value; }
+        }
+        public string User_firstname
+        {
+            get { return user_firstname; }
+            set { user_firstname = value; }
+        }
+        public string User_surname
+        {
+            get { return user_surname; }
+            set { user_surname = value; }
+        }
+        public string User_sex
+        {
+            get { return user_sex; }
+            set { user_sex = value; }
+        }
+        public string User_mail
+        {
+            get { return user_mail; }
+            set { user_mail = value; }
+        }
+        public int User_type_id
+        {
+            get { return user_type_id; }
+            set { user_type_id = value; }
+        }
+        public string User_address
+        {
+            get { return user_address; }
+            set { user_address = value; }
+        }
+        public string User_login_name
+        {
+            get { return user_login_name; }
+            set { user_login_name = value; }
+        }
+        public string User_password
+        {
+            get { return user_password; }
+            set { user_password = value; }
+        }
+        public string User_tel
+        {
+            get { return user_tel; }
+            set { user_tel = value; }
+        }
+        public clsUser() { }
+        public clsUser(int user_id, string user_firstname,string user_surname,string user_sex,string user_mail,int user_type_id,string user_address,string user_login_name,string user_password, string user_tel,DateTime user_last_login, int user_state)
+        {
+            this.user_id=user_id;
+            this.user_firstname= user_firstname;
+            this.user_surname= user_surname;
+            this.user_sex=user_sex;
+            this.user_mail=user_mail;
+            this.user_type_id= user_type_id;
+            this.user_address=user_address;
+            this.user_login_name=user_login_name;
+            this.user_password=user_password;
+            this.user_tel=user_tel;
+            this.user_last_login= user_last_login;
+            this.user_state= user_state;
+        }
+        clsManejoDatos omanejo = new clsManejoDatos();
+        public DataTable getAllUsersApp()
+        {
+            try { return omanejo.selectSinParam("SP_getAllUsersApp"); }
+            catch { return null; }
+
+        }
+        public int ValidateUser(string userName, string password)
+        {
+            SqlParameter[] parametro=new SqlParameter[2] ;
+            parametro[0] = new SqlParameter("@user_login_name",userName);
+            parametro[1] = new SqlParameter("@user_password",password);
+            try
+            {
+                return omanejo.BuscarDatos(parametro, "sp_validateUser");
+            }
+            catch 
+            {
+                return 0;
+            }
+        }
+        public int giveIdUser(string userName)
+        {
+            int idUser = 0;
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_login_name", userName);
+            try
+            {
+                SqlDataReader reader =omanejo.TraerDatos(parametro, "sp_getId");
+                while (reader.Read())
+                {
+                    idUser= reader.GetInt32(0);
+                }
+                return idUser;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public DataTable getUsersDataByMajor(int idmajor, string dato)
+        {
+            parametro = new SqlParameter[2];
+            parametro[0] = new SqlParameter("@dato", dato);
+            parametro[1] = new SqlParameter("@idMajor", idmajor);
+            try { return omanejo.select(parametro, "SP_getUsersDataByMajor"); }
+            catch { return null; }
+        }
+        public DataTable getAllDataUsersByMajor(int major)
+        {
+            parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@idMajor", major);
+            try { return omanejo.select(parametro, "SP_getAllDataUsersByMajor"); }
+            catch { return null; }
+        }
+        public string giveTypeUser(string userName)
+        {
+            string typeUser = string.Empty;
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_login_name", userName);
+            try
+            {
+                SqlDataReader reader =omanejo.TraerDatos(parametro, "sp_getType");
+                while (reader.Read())
+                {
+                    typeUser= reader.GetString(0);
+                }
+                return typeUser;
+            }
+            catch
+            {
+                return "Anonim";
+            }
+        }
+        public void getUser(string userName, string password)
+        {
+            SqlParameter[] parametro=new SqlParameter[2] ;
+            parametro[0] = new SqlParameter("@user_login_name",userName);
+            parametro[1] = new SqlParameter("@user_password",password);
+            try
+            {
+                SqlDataReader reader= omanejo.TraerDatos(parametro, "sp_getUser");
+                while (reader.Read()) 
+                {
+                    this.user_id = reader.GetInt32(0);
+                    this.user_firstname = reader.GetString(1);
+                    this.user_surname = reader.GetString(2);
+                    this.user_sex = reader.GetString(3);
+                    this.user_mail = reader.GetString(4);
+                    this.user_type_name = reader.GetString(5);
+                    this.user_address = reader.GetString(6);
+                    this.user_login_name = reader.GetString(7);
+                    this.user_password = reader.GetString(8);
+                    this.user_tel = reader.GetString(9);
+                    this.user_last_login = reader.GetDateTime(10);
+                    this.user_state = reader.GetInt32(11);
+                    this.user_url = reader.GetString(12);
+                }
+            }
+            catch
+            {
+            }
+        }
+        public DataTable getUserDataType(int user_type_id)
+        {
+            parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_type_id", user_type_id);
+            try { return omanejo.select(parametro, "sp_getUserDataType"); }
+            catch { return null; }
+
+        }
+        public DataTable getUserDataType(int user_type_id, string dato)
+        {
+            parametro = new SqlParameter[2];
+            parametro[0] = new SqlParameter("@user_type_id", user_type_id);
+            parametro[1] = new SqlParameter("@dato", dato);
+            try { return omanejo.select(parametro, "sp_getUserData"); }
+            catch { return null; }
+
+        }
+        public string updateUser(string userName, string password)
+            {
+                string res = string.Empty;
+                SqlParameter[] parametro=new SqlParameter[2] ;
+                parametro[0] = new SqlParameter("@user_login_name",userName);
+                parametro[1] = new SqlParameter("@user_password",password);
+                try
+                {
+                    res=omanejo.modificarDatos(parametro, "sp_newPass");
+                   
+                }
+                catch (Exception ex)
+                {
+                    res = ex.Message.ToString();
+                }
+                return res;
+            }
+        public DataTable getUsersType()
+        {
+            try { return omanejo.selectSinParam("SP_GET_UsersType"); }
+            catch { return null; }
+        }
+        SqlParameter[] parametro;
+        public DataTable buscarDatos(string dato, int user_type_id)
+        {
+            parametro = new SqlParameter[2];
+            parametro[0] = new SqlParameter("@dato", dato);
+            parametro[1] = new SqlParameter("@user_type", user_type_id);
+            try { return omanejo.select(parametro, "sp_BuscarDatos"); }
+            catch { return null; }
+
+        }
+        public string updateAllDataUser(string name, string surname, string tel, string mail, string direccion, int type_user, int estate, int id_user, int id_orientationModificar)
+        {
+            SqlParameter[] parametro = new SqlParameter[9];
+            parametro[0] = new SqlParameter("@name", name);
+            parametro[1] = new SqlParameter("@surname", surname);
+            parametro[2] = new SqlParameter("@tel", tel);
+            parametro[3] = new SqlParameter("@mail", mail);
+            parametro[4] = new SqlParameter("@direccion", direccion);
+            parametro[5] = new SqlParameter("@type_user", type_user);
+            parametro[6] = new SqlParameter("@estate", estate);
+            parametro[7] = new SqlParameter("@id_user", id_user);
+            parametro[8] = new SqlParameter("@id_orientation", id_orientationModificar);
+
+            try { return omanejo.modificarDatos(parametro, "sp_updateAllDataUser"); }
+            catch { return "error"; }
+        }
+        public int idOrientationUser(int id_user)
+        {
+            DataTable dt = new DataTable();
+            parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@id_user", id_user);
+            try
+            {
+                dt = omanejo.select(parametro, "sp_getIdUserOrientation");
+                return int.Parse(dt.Rows[0][0].ToString());
+            }
+            catch { return -1; }
+        }
+        public string eliminarUser(int id)
+        {
+            parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@id", id);
+            try { return omanejo.modificarDatos(parametro, "sp_eliminarUser"); }
+            catch { return "error"; }
+        }
+        public DataTable buscarDatos(string dato)
+        {
+            parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@dato", dato);
+            try { return omanejo.select(parametro, "sp_BuscarDatosAllUsers"); }
+            catch { return null; }
+
+        }
+        public DataTable getUserDATABY_ID(int user_id)
+        {
+            parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_id", user_id);
+            try { return omanejo.select(parametro, "sp_getUserDATABY_ID"); }
+            catch { return null; }
+
+        }       
+        public bool eliminarRoot(int id)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@id", id);
+            try
+            {
+                string res = omanejo.select(parametro, "sp_deleteRoot").Rows[0][0].ToString();
+                if (res == "1") return true;
+                else return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public string eliminalo(int id)
+        {
+            try
+            {
+                SqlParameter[] parametro = new SqlParameter[1];
+                parametro[0] = new SqlParameter("@id", id);
+                return omanejo.modificarDatos(parametro, "SP_GET_DELETE_USER");
+            }
+            catch { return "error"; }
+        }
+
+        //public int idUserOrientation(int id_user, int id_orientacion)
+        //{
+        //    DataTable dt = new DataTable();
+        //    parametro = new SqlParameter[2];
+        //    parametro[0] = new SqlParameter("@id_user", id_user);
+        //    parametro[1] = new SqlParameter("@id_orientation", id_orientacion);
+        //    try
+        //    {
+        //        dt=omanejo.select(parametro, "sp_getIdUserOrientation");
+        //        return int.Parse(dt.Rows[0][0].ToString());
+        //    }
+        //    catch { return 0; }
+            
+        //}
+
+        public string updateAllDataUser(string name, string surname, string tel, string mail, string direccion, int type_user, int estate, int id_user)
+        {
+            SqlParameter[] parametro = new SqlParameter[8];
+            parametro[0] = new SqlParameter("@name", name);
+            parametro[1] = new SqlParameter("@surname", surname);
+            parametro[2] = new SqlParameter("@tel", tel);
+            parametro[3] = new SqlParameter("@mail", mail);
+            parametro[4] = new SqlParameter("@direccion", direccion);
+            parametro[5] = new SqlParameter("@type_user", type_user);
+            parametro[6] = new SqlParameter("@estate", estate);
+            parametro[7] = new SqlParameter("@id_user", id_user);
+
+            try { return omanejo.modificarDatos(parametro, "sp_updateAllDataUserAdmin"); }
+            catch { return "error"; }
+        }
+        //public string updateAllDataUser(string name, string surname, string tel, string mail, string direccion, int type_user, int estate, int id_user, int id_orientation)
+        //{
+        //    SqlParameter[] parametro = new SqlParameter[8];
+        //    parametro[0] = new SqlParameter("@name", name);
+        //    parametro[1] = new SqlParameter("@surname", surname);
+        //    parametro[2] = new SqlParameter("@tel", tel);
+        //    parametro[3] = new SqlParameter("@mail", mail);
+        //    parametro[4] = new SqlParameter("@direccion", direccion);
+        //    parametro[5] = new SqlParameter("@type_user", type_user);
+        //    parametro[6] = new SqlParameter("@estate", estate);
+        //    parametro[7] = new SqlParameter("@id_user", id_user);
+        //    parametro[8] = new SqlParameter("@id_orientation", id_orientation);
+        //    try { return omanejo.modificarDatos(parametro, "sp_updateAllDataUser"); }
+        //    catch { return "error"; }
+        //}
+        public string InsertAllDataUser(string name, string surname, string sex, string mail, int type_user, string direccion,string loginName, string Pass, string tel, int estate, string orientation_name)
+        {
+            SqlParameter[] parametro = new SqlParameter[11];
+            parametro[0] = new SqlParameter("@name", name);
+            parametro[1] = new SqlParameter("@surname", surname);
+            parametro[2] = new SqlParameter("@sex", sex);
+            parametro[3] = new SqlParameter("@mail", mail);
+            parametro[4] = new SqlParameter("@type_user", type_user);
+            parametro[5] = new SqlParameter("@direccion", direccion);
+            parametro[6] = new SqlParameter("@loginName", loginName);
+            parametro[7] = new SqlParameter("@pass", Pass);
+            parametro[8] = new SqlParameter("@tel", tel);
+            parametro[9] = new SqlParameter("@estate", estate);
+            parametro[10] = new SqlParameter("@orientation_name", orientation_name);
+            try { return omanejo.modificarDatos(parametro, "sp_insertAllDataUser"); }
+            catch { return "error"; }
+
+        }
+        public DataTable getUsersTutorComboBox(int idTutor)
+        {
+            parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@id_tutor", idTutor);
+            try { return omanejo.select(parametro, "sp_getUsersTutorComboBox"); }
+            catch { return null; }
+
+        }
+        public DataTable getUsersTutorApp(int user_type_id)
+        {
+            parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@userType", user_type_id);
+            try { return omanejo.select(parametro, "sp_GetUsersTutorApp"); }
+            catch { return null; }
+
+        }
+        public bool validarLoginName(string loginName)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_login_name", loginName);
+            try
+            {
+                if (omanejo.select(parametro, "validarLoginName").Rows[0][0].ToString() == "0")
+                    return true;
+                else
+                    return false;
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public DataTable selectAllDatosByLoginName(string loginName)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@loginName", loginName);
+   
+            try
+            {
+                return omanejo.select(parametro, "sp_getUserDATABY_loginName");
+            }
+            catch { return null; }
+            
+        }
+
+        public string InserExpLaboral(string institucion, string area, string funcion, DateTime f_inicio, DateTime f_fin, int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[6];
+            parametro[0] = new SqlParameter("@institucion", institucion);
+            parametro[1] = new SqlParameter("@area", area);
+            parametro[2] = new SqlParameter("@funcion", funcion);
+            parametro[3] = new SqlParameter("@fecha_inicio", f_inicio);
+            parametro[4] = new SqlParameter("@fecha_fin", f_fin);
+            parametro[5] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.modificarDatos(parametro, "spInsertExpLab");
+        }
+
+        public string UpdateExpLaboral(int id_expLab,string institucion, string area, string funcion, DateTime f_inicio, DateTime f_fin)
+        {
+            SqlParameter[] parametro = new SqlParameter[6];
+            parametro[0] = new SqlParameter("@id_expLaboral", id_expLab);
+            parametro[1] = new SqlParameter("@institucion", institucion);
+            parametro[2] = new SqlParameter("@area", area);
+            parametro[3] = new SqlParameter("@funcion", funcion);
+            parametro[4] = new SqlParameter("@fecha_inicio", f_inicio);
+            parametro[5] = new SqlParameter("@fecha_fin", f_fin);
+
+            return omanejo.modificarDatos(parametro, "spUpdateExpLab");
+
+        }
+
+        public string DeleteExpLaboral(int id_expLab)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@id_expLaboral", id_expLab);
+
+            return omanejo.modificarDatos(parametro, "spDeleteExpLab");
+        }
+
+        public DataTable SelectExpLaboral(int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.select(parametro, "spSelectExpLab");
+        }
+
+        public string InsertInfAcademica(string titulo, string institucion, int id_situacion, DateTime f_inicio, DateTime f_fin, string observaciones,int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[7];
+            parametro[0] = new SqlParameter("@titulo", titulo);
+            parametro[1] = new SqlParameter("@institucion", institucion);
+            parametro[2] = new SqlParameter("@id_situacion", id_situacion);
+            parametro[3] = new SqlParameter("@fecha_i", f_inicio);
+            parametro[4] = new SqlParameter("@fecha_f", f_fin);
+            parametro[5] = new SqlParameter("@observaciones", observaciones);
+            parametro[6] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.modificarDatos(parametro, "spInsertInfAc");
+        }
+
+        public string UpdateInfAcademica(int id_infAcademica,string titulo, string institucion, int id_situacion, DateTime f_inicio, DateTime f_fin, string observaciones, int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[8];
+            parametro[0] = new SqlParameter("@id_infAcademica", id_infAcademica);
+            parametro[1] = new SqlParameter("@titulo", titulo);
+            parametro[2] = new SqlParameter("@institucion", institucion);
+            parametro[3] = new SqlParameter("@id_situacion", id_situacion);
+            parametro[4] = new SqlParameter("@fecha_i", f_inicio);
+            parametro[5] = new SqlParameter("@fecha_f", f_fin);
+            parametro[6] = new SqlParameter("@observaciones", observaciones);
+            parametro[7] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.modificarDatos(parametro, "spUpdateInfAc");
+        }
+
+        public string DeleteInfAcademica(int id_infAcademica)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@id_infAcademica", id_infAcademica);
+
+            return omanejo.modificarDatos(parametro, "spDeleteInfAc");
+        }
+
+        public DataTable SelectInfAcademica(int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.select(parametro, "spSelectInfAc");
+        }
+
+        public DataTable SelectSituacion()
+        {
+            return omanejo.selectSinParam("spSelectSituacion");
+        }
+
+        public string InsertCursos(string nombre, string dictado_por, string lugar, int duracion, DateTime f_inicio, DateTime f_fin, int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[7];
+            parametro[0] = new SqlParameter("@nombre", nombre);
+            parametro[1] = new SqlParameter("@dictado_por", dictado_por);
+            parametro[2] = new SqlParameter("@lugar", lugar);
+            parametro[3] = new SqlParameter("@duracion", duracion);
+            parametro[4] = new SqlParameter("@fecha_i", f_inicio);
+            parametro[5] = new SqlParameter("@fecha_f", f_fin);
+            parametro[6] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.modificarDatos(parametro, "spInsertCursos");
+        }
+
+        public string UpdateCursos(int id_cursos, string nombre, string dictado_por, string lugar, int duracion, DateTime f_inicio, DateTime f_fin, int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[8];
+            parametro[0] = new SqlParameter("@id_cursos", id_cursos);
+            parametro[1] = new SqlParameter("@nombre", nombre);
+            parametro[2] = new SqlParameter("@dictado_por", dictado_por);
+            parametro[3] = new SqlParameter("@lugar", lugar);
+            parametro[4] = new SqlParameter("@duracion", duracion);
+            parametro[5] = new SqlParameter("@fecha_i", f_inicio);
+            parametro[6] = new SqlParameter("@fecha_f", f_fin);
+            parametro[7] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.modificarDatos(parametro, "spUpdateCursos");
+        }
+
+        public string DeleteCursos(int id_cursos)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@id_cursos", id_cursos);
+
+            return omanejo.modificarDatos(parametro, "spDeleteCursos");
+        }
+
+        public DataTable SelectCursos(int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.select(parametro, "spSelectCursos");
+        }
+
+        public string CursosMostrarAviso(int id_cursos, int mostrar)
+        {
+            SqlParameter[] parametro = new SqlParameter[2];
+            parametro[0] = new SqlParameter("@id_cursos", id_cursos);
+            parametro[1] = new SqlParameter("@mostrar", mostrar);
+
+            return omanejo.modificarDatos(parametro, "cursosMostrarAviso");
+        }
+
+        public DataTable SelectUser(int user_id)
+        {
+            SqlParameter[] parametro = new SqlParameter[1];
+            parametro[0] = new SqlParameter("@user_id", user_id);
+
+            return omanejo.select(parametro, "spSelectUser");
+        }
+
+        public string updateUserAllDatos(int user_id ,DateTime fec_nac,int prvoincia ,string dni ,int localidad ,string apellido ,string nombre ,string sex ,string mail ,string direccion ,string tel )
+        {
+            SqlParameter[] parametro = new SqlParameter[11];
+            parametro[0] = new SqlParameter("@user_id", user_id);
+            parametro[1] = new SqlParameter("@fec_nac", fec_nac);
+            parametro[2] = new SqlParameter("@prvoincia", prvoincia);
+            parametro[3] = new SqlParameter("@dni", dni);
+            parametro[4] = new SqlParameter("@localidad", localidad);
+            parametro[5] = new SqlParameter("@apellido", apellido);
+            parametro[6] = new SqlParameter("@nombre", nombre);
+            parametro[7] = new SqlParameter("@mail", mail);
+            parametro[8] = new SqlParameter("@sex", sex);
+            parametro[9] = new SqlParameter("@direccion", direccion);
+            parametro[10] = new SqlParameter("@tel", tel);
+
+            return omanejo.modificarDatos(parametro, "spUpdateUser");
+        }
+
+        public string UpdateShowInfAc(int id_infAc, int show)
+        {
+            string res = string.Empty;
+            try
+            {
+                SqlParameter[] Param = new SqlParameter[2];
+                Param[0] = new SqlParameter();
+                Param[0].ParameterName = "@id_infAcademica";
+                Param[0].SqlDbType = SqlDbType.Int;
+                Param[0].SqlValue = id_infAc;
+
+                Param[1] = new SqlParameter();
+                Param[1].ParameterName = "@show";
+                Param[1].SqlDbType = SqlDbType.Int;
+                Param[1].SqlValue = show;
+
+                res = omanejo.modificarDatos(Param, "sp_showInfAc");
+
+            }
+            catch (Exception e)
+            {
+                res = e.Message.ToString();
+            }
+            return res;
+        }
+
+        public string UpdateShowExpLab(int id_exLab, int show)
+        {
+            string res = string.Empty;
+            try
+            {
+                SqlParameter[] Param = new SqlParameter[2];
+                Param[0] = new SqlParameter();
+                Param[0].ParameterName = "@id_ExpLaboral";
+                Param[0].SqlDbType = SqlDbType.Int;
+                Param[0].SqlValue = id_exLab;
+
+                Param[1] = new SqlParameter();
+                Param[1].ParameterName = "@show";
+                Param[1].SqlDbType = SqlDbType.Int;
+                Param[1].SqlValue = show;
+
+                res = omanejo.modificarDatos(Param, "sp_showExpLab");
+
+            }
+            catch (Exception e)
+            {
+                res = e.Message.ToString();
+            }
+            return res;
+        }
+    }
+}

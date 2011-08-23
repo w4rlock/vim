@@ -1,0 +1,16 @@
+
+MAPEOS
+
+<F1> Muestra la ayuda
+<F2> Configurar Snippets
+<F4> Formatea la consulta
+
+<F5> Ejecuta la Query
+<F6> Muestra todas las tablas
+<F7> Ejecuta un select de una tabla.
+
+<F8> NerdTree
+<F9> TagList
+
+<C-s> Editar SQL.vim
+<C-x><C-k> Diccionario de syntax.

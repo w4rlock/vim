@@ -1,0 +1,19 @@
+" 1.2 (created: 2008/08/16 18:51:52)
+"NAVEGACION CORRECTA
+"<C-F><C-B>
+"<C-D><C-U>
+"<C-E><C-Y> o j k
+" Mappings
+
+" Options
+set guioptions-=mrTb
+set showtabline=0
+"set wildoptions=auto
+set cpt=l
+
+" Abbreviations
+
+source! ~/.vimperatorrc.local
+
+" vim: set ft=vimperator:
+"source ~/.vimperator/color/desert_revisited.vimp

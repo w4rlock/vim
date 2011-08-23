@@ -1,0 +1,94 @@
+#!/bin/bash
+#===============================================================================
+#
+#          FILE:  nuevaEntidad.sh
+# 
+#         USAGE:  ./nuevaEntidad.sh 
+# 
+#   DESCRIPTION:  
+# 
+#       OPTIONS:  ---
+#  REQUIREMENTS:  ---
+#          BUGS:  ---
+#         NOTES:  ---
+#        AUTHOR:  
+#         EMAIL:  warlock.gpl@gmail.com 
+#       VERSION:  1.0
+#       CREATED:  03/19/2011 12:26:02 AM ART
+#      REVISION:  ---
+#===============================================================================
+#echo -n ${LBLUE}
+LBLUE="\033[1;34m"
+LGREEN="\033[1;32m"
+LRED="\033[1;31m"    
+
+function setTypes()
+{
+
+    echo "Ingrese el tipo de dato: "
+    read tipo
+
+}
+
+
+#------------------------------------------------------------------------------
+function setEntidad()
+{
+    echo "Ingrese nombre Entidad: "
+    read ENTIDAD
+}
+
+#------------------------------------------------------------------------------
+function setNulleables()
+{
+
+    echo "Permitir valores nulos:"
+    read nul
+
+}
+
+#------------------------------------------------------------------------------
+function setCantCampos()
+{
+
+    echo -n "Ingrese cantidad de campos: "
+    read cant
+
+}
+
+#------------------------------------------------------------------------------
+function setCampos()
+{
+
+    echo "Ingrese nombre del campo:"
+    read campo
+
+}
+
+#------------------------------------------------------------------------------
+function getEntidad()
+{
+
+    echo "Nombre de la Entidad: "$ENTIDAD
+    echo "Cantidad de Campos: "$CANTCAMPOS
+
+}
+
+#------------------------------------------------------------------------------
+let CANTCAMPOS
+let ENTIDAD
+if [[ $# -gt 2 ]]; then
+    for (( i = 0; i < 2; i++ )); do
+echo $1
+        case $1 in
+          "-e"|"-E" ) ENTIDAD=$2    ;;
+          "-c"|"-C" ) CANTCAMPOS=$2 ;;
+         esac
+         shift
+    done
+else
+    setEntidad
+    setCantCampos 
+fi
+
+getEntidad

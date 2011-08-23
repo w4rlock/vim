@@ -1,0 +1,51 @@
+                                                                Introducción
+El trabajo realizado consta de un sistema Web que facilita a los postulantes de diferentes carreras
+el acceso a un posible trabajo a través del contacto del tutor con la empresa.
+
+Para poder realizarlo se ha consultado diferentes sitios web así como también los apuntes de cátedra,
+donde las técnicas y códigos han servido de base a este trabajo. Todo ello con el fin de lograr un 
+informe profundo, conciso y claro, dejando en el lector la sensación de haber conocido en profundidad el objeto de estudio.
+
+                                                                Objetivos
+El objetivo general de este trabajo se basa en agilizar el acceso al campo laboral de los postulantes de la Universidad de La Punta
+Este trabajo consta de dos objetivos fundamentales en lo que se refiere:
+
+1- Beneficiar a los alumnos postulantes de las diferentes carreras a un acceso al campo laboral en forma rápida a través del sistema Web.
+2- Beneficiar a la institución, persona o empresa interesada en incorporar personal, a través de un aviso publicado en el sistema creado.
+
+No podemos dejar de lado el marco histórico o contexto histórico en el que estamos inmersos, en donde no se puede prescindir del uso de la tecnología
+digital. En el siglo XXI los problemas cotidianos son facilmente resueltos mediante estos sistemas, en donde toda la información es almacenada
+en grandes servidores, a diferencias de otras épocas en donde el hombre no tenía acceso a la informatica.
+
+Tengamos en cuenta que el contexto histórico es muy importante en la realización de un trabajo así como también el político y social
+para comprender algunos aspectos de cada texto en particular. Esto se hace para destacar en cada caso aqullos factores determinantes
+para la mejor comprensión de una obra, de esta forma se puede entender conociendo el presente en el que se basa.
+
+
+
+
+                                                                Desarrollo
+Al enfrentar una investigación de cualquier tipo es recomendable registrar de alguna manera todo lo que sabemos y asociamos con el tema.
+Este proceso justamente nos dará la oportunidad de delimitar los aspectos más interesantes para realizar el trabajo.
+
+Para ello se ha utilizado un marco teórico y conceptual, así como también se ha tenido en cuenta las pautas y requisitos por parte del 
+docente para la elaboración del mismo, la función que cumple cada actor dentro de este sistema especifico mediante técnicas aprendidas
+en la cátedra "Ingeniería de Software", como diagramas de casos de uso.
+
+                                                             
+A lo largo del trabajo surgieron diferentes problemas técnicos así como también posibles soluciones. Uno de los tantos inconvenientes surge con respecto a la 
+evolución del sistema, el cual cuenta con diferentes funciones para cada caso en particular, tal es así que no se podía lograr que el sistema
+cumpliera con su función en forma especifica. Para resolver este inconveniente se recurrio a diferentes sitios de la web, encontrando la solución
+deseada.
+ 
+Las herramientas utilizadas para concretar el objetivo fueron diferentes programas que se utilizaron a lo largo de la carrera como 
+"Visual Studio 2010" para desarrollar dicho sistema y "SQL Server 2008" para base de datos.
+
+Como se dice en el párrafo precedente, se tomó como base para construir el trabajo los diagramas de casos de uso para desarrollar dicho sistema. 
+Dicho diagramas fueron tomados en la étapa de análisis de los requisitos del sistema.
+
+
+
+en base a las lecciones aprendidas con el objetivo de aprovechar
+las experiencias adquiridas durante la carrera y el desarrollo de
+la práctica en el entorno laboral

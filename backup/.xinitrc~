@@ -1,0 +1,11 @@
+DEFAULT_SESSION=awesome
+xscreensaver -nosplash &
+xsetroot -cursor_name left_ptr
+
+case $1 in
+        awesome) 	exec awesome ;;
+		scrotwm)    exec scrotwm ;;
+  enlightenment) 	exec enlightenment_start ;;
+			  *)    exec $DEFAULT_SESSION ;;
+		esac
+xsetroot -cursor_name left_ptr

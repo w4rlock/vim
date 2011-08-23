@@ -1,0 +1,101 @@
+PATH=/bin:/usr/bin:/usr/local/bin 
+VERBOSE=off
+MAILDIR=$HOME/mail 
+DEFAULT=$HOME/mail/Inbox
+#LOGFILE=$HOME/.procmaillog
+FORMAIL=/usr/bin/formail
+LOGABSTRACT=no
+
+:0 a
+$MAILDIR/Duplicates
+
+:0
+* ^From:.*(diana.martorell@sondeos.com.ar|mcabral@coradir.com.ar|mepala@belatrixsf.com|spalacios@codes.com.ar)
+$MAILDIR/Empresas
+
+:0
+* ^To:.*(diana.martorell@sondeos.com.ar|mcabral@coradir.com.ar|mepala@belatrixsf.com|spalacios@codes.com.ar)
+$MAILDIR/Empresas
+
+:0
+*^From:.*(jjsaez@ulp.edu.ar|saezfernando@gmail.com)
+$MAILDIR/Profesores
+:0
+*^To:.*(jjsaez@ulp.edu.ar|saezfernando@gmail.com)
+$MAILDIR/Profesores
+
+:0
+* ^From:.*(accept1984@gmail.com|battleofhymns@gmail.com|warlock.gpl@gmail.com)
+$MAILDIR/W4rlock
+
+:0
+* ^To:.*(accept1984@gmail.com|battleofhymns@gmail.com|warlock.gpl@gmail.com)
+$MAILDIR/W4rlock
+
+:0
+* ^From:.*(@dkcorp.ec)
+$MAILDIR/Irssi
+
+:0
+* ^To:.*(@dkcorp.ec)
+$MAILDIR/Irssi
+
+:0
+* ^To:.*PILP@ulp.edu.ar
+$MAILDIR/Pilp
+
+:0
+* ^From:.*PILP@ulp.edu.ar
+$MAILDIR/Pilp
+
+:0
+* ^To:.*(josemonty10@gmail.com|monti_jose04@hotmail.com|sanchezvrafael@hotmail.com|hernanfsantiago@hotmail.com|eze_cool04@hotmail.com|florencia.pineyro@live.com|vicrodg@gmail.com|zipnubs@gmail.com)
+$MAILDIR/Ulp-friends
+
+:0
+* ^From:.*(josemonty10@gmail.com|monti_jose04@hotmail.com|sanchezvrafael@hotmail.com|hernanfsantiago@hotmail.com|eze_cool04@hotmail.com|florencia.pineyro@live.com|vicrodg@gmail.com|zipnubs@gmail.com)
+$MAILDIR/Ulp-friends
+
+:0
+* ^To:.*(@novedadesdeMercadoLibre.com.ar|@joindiaspora|@badoo|@mailer.lastfm|@ofertasmercadolibre.com|@yammer.com|@postmaster.twitter.com|@microsoft.windowslive.com)
+$MAILDIR/Spam
+
+:0
+* ^From:.*(@novedadesdeMercadoLibre.com.ar|@joindiaspora|@badoo|@mailer.lastfm|@ofertasmercadolibre.com|@yammer.com|@postmaster.twitter.com|@microsoft.windowslive.com)
+$MAILDIR/Spam
+
+:0
+* ^To:.*(apolog2004@hotmail.com|malaniz@code4life.com.ar)
+$MAILDIR/Friends
+
+:0
+* ^From:.*(apolog2004@hotmail.com|malaniz@code4life.com.ar)
+$MAILDIR/Friends
+
+:0
+* ^To:.*(tramix_pjsl@unitech.com.ar|corrientes_iurix@unitech.com.ar|arn_sirfrar@unitech.com.ar)
+$MAILDIR/Requerimientos
+
+:0
+* ^From:.*(tramix_pjsl@unitech.com.ar|corrientes_iurix@unitech.com.ar|arn_sirfrar@unitech.com.ar)
+$MAILDIR/Requerimientos
+
+:0
+* ^To:.*@unitech.com.ar
+$MAILDIR/Unitech
+
+:0
+* ^From:.*@unitech.com.ar
+$MAILDIR/Unitech
+
+:0
+* ^To:.*(alum_it_software@ulp.edu.ar)
+$MAILDIR/Ulp
+
+:0
+* ^From:.*(alum_it_software@ulp.edu.ar)
+$MAILDIR/Ulp
+
+:0
+*.*
+$MAILDIR/Default

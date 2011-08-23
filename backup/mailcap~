@@ -1,0 +1,28 @@
+# Images
+video/*                      ; mplayer %s                       ; copiousoutput
+image/*                      ; feh -.   %s > /dev/null          ; copiousoutput
+application/pdf              ; epdfview %s                      ; copiousoutput
+application/rar              ; ark %s                           ; copiousoutput
+application/x-rar-compressed ; rar v %s > /dev/null             ; copiousoutput
+application/x-compressed-tar ; tar xvf %s                       ; copiousoutput
+application/x-script         ; cat %s                           ; copiousoutput
+application/x-shar           ; cat %s                           ; copiousoutput
+application/x-shellscript    ; cat %s                           ; copiousoutput
+application/x-sh             ; cat %s                           ; copiousoutput
+application/x-tar            ; /bin/tar tvvf %s                 ; copiousoutput
+application/x-tar-gz         ; /bin/tar tfvz %s                 ; copiousoutput
+application/x-tcl            ; cat %s                           ; copiousoutput
+application/x-tex            ; cat %s                           ; copiousoutput
+
+application/x-zip-compressed ; unzip -v %s                      ; copiousoutput
+application/zip              ; unzip -v %s                      ; copiousoutput
+application/msword           ; /usr/bin/antiword %s             ; copiousoutput
+
+audio/*                      ; mplayer %s                       ; copiousoutput
+text/plain                   ; cat %s                           ; copiousoutput
+text/richtext                ; /usr/bin/abiword %s              ; copiousoutput
+
+
+#text/html                   ; lynx -dump %s        ; nametemplate=%s.html ; copiousoutput
+text/html                    ; w3m %s
+

@@ -1,0 +1,7 @@
+" ==Vimperator_Color_Scheme==
+" name: Desert Revisited
+" ==Desert_Revisited_Color_Scheme==
+
+hi Normal    background: #FFFFFF; color: #afafaf; font-size: 9pt; font-family: terminus; 
+hi CmdLine   background: #FFFFFF; color: #FFFFFFF font-size: 10pt; font-family: terminus; font-weight: bold; padding:  0px 3px;
+

@@ -1,0 +1,46 @@
+!*foreground                             : green
+urxvt.foreground                        : green
+urxvt.background                        : black
+urxvt.inheritPixmap                     : True
+urxvt.termName                          : rxvt
+urxvt.visualBell                        : True
+! urxvt.backspacekey           		    : "^H"
+urxvt.scrollTtyKeypress         		: True
+urxvt.scrollTtyOutput                   : False
+urxvt.saveLines                			: 1024
+urxvt.multichar_encoding                : utf-8
+urxvt.inputMethod                       : fcitx
+
+! urxvt.font                            : -windows-proggyclean-medium-*-*-*-12-*-*-*-*-*-iso8859-1
+! urxvt.font                            : -wenquanyi-*-medium-*-*-*-12-*-*-*-*-*-iso10646-*
+!urxvt.mfont                             : -wenquanyi-*-medium-*-*-*-12-*-*-*-*-*-iso10646-*
+!URxvt*font: xft:Terminus:pixelsize=12
+!URxvt*boldfont: xft:Terminus:size=10
+urxvt.transparent                       : True
+!urxvt.tintColor                        : blue  color de la transparencia
+!urxvt*scrollColor                      : blue       
+
+urxvt*scrollstyle						: rxvt
+urxvt*scrollTtyKeypress                 : true
+urxvt*scrollWithBuffer                  : false
+urxvt*scrollTtyOutput                   : false
+urxvt.cursorColor                       : yellow
+urxvt.cursorColor2                      : black
+urxvt*scrollBar                         : false
+!scrollbar alignment
+!urxvt*scrollBar_right					: true
+!urxvt*scrollColor						: #777777  
+urxvt.shading                           : 17      #(nivel de opacidad, menor numero es mas oscuro)
+urxvt.fading                            : 60
+
+!TABS
+!urxvt*perl-ext-common: default,tabbed
+
+urxvt.urlLauncher                       : firefox
+URxvt.perl-ext                          : default,url-select
+URxvt.keysym.M-u                        : perl:url-select:select_next
+URxvt.underlineURLs                     : true
+Xcursor.theme                           : NeoAlien-dark
+
+URxvt.font                              : xft:Terminus:pixelsize=14:antialias=false
+URxvt.boldFont                          : xft:Terminus:bold:pixelsize=14:antialias=false

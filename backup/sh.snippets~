@@ -1,0 +1,56 @@
+# #!/bin/bash
+snippet #!
+	#!/bin/bash
+snippet if
+	if [[ ${1:condition} ]]; then
+		${2:#statements}
+	fi
+snippet el
+	else
+		${1:#g33k cod3}
+	fi
+snippet elif
+	elif [[ ${1:condition} ]]; then
+		${2:#statements}
+	fi
+snippet for
+	for (( ${2:i} = 0; $2 < ${1:count}; $2++ )); do
+		${3:#statements}
+	done
+snippet wh
+	while [[ ${1:condition} ]]; do
+		${2:#statements}
+	done
+snippet until
+	until [[ ${1:condition} ]]; do
+		${2:#statements}
+	done
+snippet case
+	case $${1:VAR} in
+	  ${2:patron1} )
+			${3:comandos1}
+			;;
+	  ${4:patron2} )
+			${5:comandos2}
+			;;
+	  ${6:patron3} )
+			${7:comandos3}
+			;;
+	 esac
+snippet fun
+	function ${1:mifuncion}()
+	{
+
+		${2:# g33k cod3}
+
+	}
+snippet <
+	-lt 
+snippet colors
+	#echo -e ${LBLUE}
+	LBLUE="\033[1;34m"
+	LGREEN="\033[1;32m"
+	LRED="\033[1;31m"	
+	
+snippet =
+	-eq

@@ -1,0 +1,93 @@
+terminal = os.getenv("TERMINAL") or "urxvt"
+editor = os.getenv("EDITOR") or "vim"
+editor_cmd = terminal .. "-e "..editor
+myawesomemenu = {
+   { "manual"      , terminal .. " -e man awesome" }                           , 
+   { "edit theme"  , editor_cmd .. " " .. dir .. "/themes/default/theme.lua" } , 
+   { "edit config" , editor_cmd .. " " .. dir .. "/rc.lua" }                   , 
+   { "restart"     , awesome.restart }                                         , 
+   { "quit"        , awesome.quit }
+   }
+
+develop = {
+	{ "MonoDevelop" , "monodevelop" } , 
+	{ "NetBeans"    , "netbeans" }    , 
+	{ "gVim"        , "gvim" }
+	}
+	
+music = {
+	{ "Audacious", "audacious" }}
+
+browsers = {
+	{ "w3m"      , terminal .. " -e w3m" }    , 
+	{ "elinks"   , terminal .. " -e elinks" } , 
+	{ "firefox"  , "firefox" }                , 
+	{ "Chromium" , "chromium" }
+	}
+
+wifi = {
+	{"wicd", "wicd-client"}
+	}
+
+scanners = {
+	{"nbtscan", "exec urxvt -e nbtscan"}
+	}
+
+network = {
+	{ "wifi"     , wifi}       , 
+	{ "scanners" , scanners}   , 
+	{ "browsers" , browsers }
+	}
+
+myimagenMenu = {
+    {"Gimp"     , "gimp"}     , 
+    {"Gpicview" , "gpicview"} , 
+    {"Nitrog3n" , "nitrogen"} , 
+    {"Picasa"   , "picasa"}
+	}
+
+
+editors = {
+    { "vim"  , terminal .. " -e vim"} , 
+    { "gvim" , "gvim"}
+	}
+
+crypt = {
+    { "TrueCrypt"  , "truecrypt"}    , 
+    { "Gpa"        , "gpa"}          , 
+    { "GpgCrypter" , "gpg-crypter"}
+	}
+
+utils = {
+   {"Galculator", "galculator"}
+   }
+
+tools = {
+	{ "VirtualBox" , "VirtualBox"}             , 
+	{ "Thun4r"     , "thunar"}                 , 
+	{ "Nautilus"   , "nautilus --no-desktop"}
+	}
+
+dataBase = { 
+	{ "Query"      , "mysql-query"}                                    , 
+	{ "Emma"       , "emma"}                                           , 
+	{ "Workbench"  , "mysql-workbench"}                                , 
+	{ "PhpMyadmin" , "firefox http://localhost/phpmyadmin/index.php"}
+	}
+
+mymainmenu = awful.menu({ items = {
+	{ "Awes0me"  , myawesomemenu , beautiful.awesome_icon } , 
+	{ "Gr4phics" , myimagenMenu} , 
+	{ "edit0rs"  , editors       , beautiful.editors},
+	{ "Dev3lop"  , develop}      , 
+	{ "Mu5ic"    , music}        , 
+	{ "netw0rk"  , network}      , 
+	{ "cryp7"    , crypt}        , 
+	{ "my5ql"    , dataBase}     , 
+	{ "t00ls"    , tools         , beautiful.tools},
+	{ "Util5"    , utils}
+	}
+    })
+
+mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
+                                     menu = mymainmenu })

@@ -1,0 +1,257 @@
+snippet exc
+	EXCEPTION
+	    WHEN ${1:NO_DATA_FOUND} THEN
+			RAISE_APPLICATION_ERROR(${2:-01403},'${3:El mensaje}');
+	    WHEN ${4:TOO_MANY_ROWS} THEN
+			RAISE_APPLICATION_ERROR(${5:-01422},'${6:El mensaje}');
+	    WHEN OTHERS THEN
+			RAISE_APPLICATION_ERROR(${7:codigo},'${8:El mensaje}');
+snippet sel
+	-- -----------------------------------------------
+	SELECT ${1:campo1}, 
+		   ${2:campo2},
+		   ${3:campo3}
+	  FROM ${4:tabla}
+	 WHERE ${5:condicion}
+	-- -----------------------------------------------
+snippet sele
+	-- -----------------------------------------------
+	SELECT ${1:campo1}, 
+		   ${2:campo2},
+		   ${3:campo3}
+	  FROM ${4:tabla1} AS ${5:t1} 
+	  JOIN ${6:tabla2} AS ${7:t2} ON $5.${8:id} = $7.${9:$8}
+	  
+	 WHERE ${10:condicion}
+	       AND ${11:campo} = ${12:valor}
+	       AND ${13:campo} = ${14:valor}
+	-- -----------------------------------------------
+snippet selec
+	-- -----------------------------------------------
+	SELECT ${1:campo1}, 
+		   ${2:campo2},
+		   ${3:campo3}
+	  FROM ${4:tabla1} AS ${5:t1} 
+	  JOIN ${6:tabla2} AS ${7:t2} ON $5.${8:id} = $7.${9:$8}
+	  
+	 WHERE ${10:condicion}
+	       AND ${11:campo} = ${12:valor}
+	       AND ${13:campo} = ${14:valor}
+	 GROUP BY ${15:campo1}
+	 ORDER BY ${16:campo1} DESC ${17}
+	-- -----------------------------------------------
+snippet gro
+	GROUP BY ${1:campo} ${2}
+snippet gb
+	GROUP BY ${1:campo} ${2}
+snippet hav 
+	HAVING (${1:condicion}) ${2}
+snippet ord
+	ORDER BY ${1:campo1} ${2}
+snippet ob
+	ORDER BY ${1:campo1} ${2}
+snippet rae
+	RAISE_APPLICATION_ERROR
+snippet ndf
+	NO_DATA_FOUND
+snippet tmr
+	TOO_MANY_ROWS
+snippet zd
+	ZERO_DIVIDE
+snippet dbm
+	dbms_output.put_line(${1:campos1}||${2:campo2}) ${3}
+snippet di
+	DISTINCT
+snippet tr
+	TRIM(${1:campo}), ${2}
+snippet rt
+	RTRIM(${1:campo}), ${2}
+snippet lt
+	LTRIM(${1:campo}), ${2}
+snippet ma
+	MAX(${1:campo}) ${2}
+snippet nu
+	NUMBER ${1}
+snippet va
+	VARCHAR2(${1:50}), ${2}	
+snippet am
+	ADD_MONTHS(${1:fecha},${2:cant})
+snippet re
+	REPLACE(${1:campo},'${2:valor_viejo}','${3:valor_nuevo}')
+snippet date
+	sysdate
+snippet td
+	TO_DATE(${1:campo})
+snippet tc
+	TO_CHAR(${2:campo})
+snippet tn
+	TO_NUMBER(${1:campo})${2}
+snippet if
+	IF ${1:condition} THEN
+		${2:--cod3a}
+	END IF;
+snippet elif
+	ELSIF ${1:condition} THEN
+		${2:--cod3a}
+snippet con
+	CONCAT(${1:campo1},${2:campo2}), ${3}
+snippet substr
+	SUBSTR(${1:campo},${2:ini},${3:fin}) $4
+snippet be
+	BETWEEN ${1:1} AND ${2:90} ${3}
+snippet li
+	LIKE '%${1:dato}%' ${2}
+snippet in
+	IN ('${1:a}','${2:b}','${3:c}') $4
+snippet for
+	FOR ${1:i} IN ${2:1}..${3:20}
+	LOOP
+		${4:-- cod3a}
+	END LOOP;
+snippet forr
+	FOR ${1:i} IN REVERSE ${2:1}..${3:20}
+	LOOP
+		${4:-- cod3a}
+	END LOOP;
+
+snippet fet
+	DECLARE
+	   ${1:var1}    ${2:tabla}.${3:campo}%TYPE;
+	   ${4:var2}    ${5:tabla}.${6:campo}%TYPE;
+	   CURSOR ${7:nombre_cursor} IS 
+		${10:-- SEL, SELE, SELEC}
+	BEGIN
+	OPEN $7;
+	LOOP
+		FETCH $7 INTO $1, $4;
+			${9: --staments}
+		EXIT WHEN $7%ROWCOUNT > ${8:cant} OR $7%NOTFOUND;
+	END LOOP;
+	CLOSE $7;
+	END;
+snippet ins
+	-- -----------------------------------------------
+	INSERT INTO ${1:tabla} 
+	VALUES (${2:valor1},${3:valor2},${4:valor3},${5:valor5}) 
+	${6}
+	-- -----------------------------------------------
+snippet upd
+	-- -----------------------------------------------
+	UPDATE ${1:table}
+	SET ${2:campo1} = ${3:valor1}, 	
+		${4:campo2} = ${5:valor2},
+		${6:campo3} = ${7:valor4}
+	WHERE ${8:condicion}
+	-- -----------------------------------------------
+snippet del
+	-- -----------------------------------------------
+	DELETE ${1:table}
+	WHERE  ${2:condicion}
+	-- -----------------------------------------------
+snippet dt
+	DROP TABLE ${1:tabla}
+snippet dsp
+	DROP PROCEDURE ${1:SP_nombre}
+snippet dv
+	DROP VIEW ${1:nombre_vista}
+snippet du
+	DROP USER ${1:usuario} CASCADE;
+snippet cus
+	CREATE USER ${1:username} IDENTIFIED BY ${2:********************}
+	       DEFAULT TABLESPACE ${3:data}  
+	       TEMPORARY TABLESPACE ${4:temp}
+	       -- QUOTA 27 M ON tabla;
+	       QUOTA ${5:UNLIMITED} ON ${6:data};
+
+	CREATE ROLE programador;
+	
+	GRANT CREATE session, CREATE table, CREATE view, 
+	      CREATE procedure,CREATE synonym,
+	      ALTER table, ALTER view, ALTER procedure,ALTER synonym,
+	      DROP table, DROP view, DROP procedure,DROP synonym,
+	      TO conn;
+	GRANT programador TO $1; ${7}
+snippet cta
+	-- --------------------------------------------------------------------- `strftime("%d/%m/%Y")`
+	CREATE TABLE ${1:nombre} (	
+		${2:id} ${3:INTEGER} NOT NULL,
+		${3:nombre} ${4:VARCHAR2}(${5:cant}) NOT NULL,
+		${6:nombre} ${7:VARCHAR2}(${8:cant}),
+		${9:nombre} ${10:VARCHAR2}(${11:cant}),
+	PRIMARY KEY ($2)); 	${12}
+	-- -------------------------------------------------------------------------------
+snippet sec
+	CREATE SEQUENCE seq_${1:nombre}
+	MINVALUE ${2:1}
+	START WITH ${3:1}
+	INCREMENT BY ${4:1}
+	-- CACHE 10 ${5}
+snippet fk
+	FOREIGN KEY (${1:esteid}) REFERENCES ${2:otra_tabla}(${3:id_otra_tabla})); ${5}
+snippet csp
+	-- --------------------------------------------------------------------- `strftime("%d/%m/%Y")`
+	CREATE OR REPLACE PROCEDURE SP_${1:nombre} (${2:var1} IN ${3:VARCHAR2}, ${4:var1} OUT ${5:VARCHAR2}) 
+	AS
+	    ${6:res}  $5(${7:tam});
+	    BEGIN
+	        SELECT ${8:campo1} INTO $6
+		FROM   ${9:tabla}
+		WHERE  ${10:condition}
+	
+	    $4 := $6;
+	    
+	    EXCEPTION
+		WHEN ${11:NO_DATA_FOUND} THEN
+		    $4 := '${12:No hay datos disponibles}';
+	END; ${13}
+	-- -------------------------------------------------------------------------------
+snippet ctr
+	-- --------------------------------------------------------------------- `strftime("%d/%m/%Y")`
+	CREATE OR REPLACE TRIGGER TG_${1:mitrigger}
+	BEFORE INSERT OR UPDATE OR DELETE ON ${2:tabla} 
+	FOR EACH ROW
+	WHEN (${3:contition})
+	DECLARE
+		-- :new.campo  :old.campo
+		--${4:var1 number}
+		--${5:var2 VARCHAR2}
+		BEGIN
+		IF deleting or updating THEN
+			${6:-- transaction}
+		END IF;
+	END;
+	/
+	-- -------------------------------------------------------------------------------
+snippet cfun
+	-- --------------------------------------------------------------------- `strftime("%d/%m/%Y")`
+	CREATE OR REPLACE FUNCTION ${1:mi_funcion}(${2:var1} IN ${3:NUMBER}) 
+	   RETURN ${4:NUMBER}
+	   IS 
+	   ${5:res} $4;
+	   BEGIN 
+
+	      ${6:--SEL, SELE, SELEC}
+
+	      RETURN($5); 
+	    END;
+	/
+	-- -------------------------------------------------------------------------------
+	SELECT $1(valor) FROM DUAL; 
+snippet cvi
+	CREATE VIEW ${1:nombre}
+	AS
+	(
+		${2:-- sel, sele, select}
+	) 
+snippet ccur
+	-- --------------------------------------------------------------------- `strftime("%d/%m/%Y")`
+	DECLARE
+	CURSOR ${1:micursor} IS
+		--SEL, SELE
+		${2:var_row} ${3:tabla}%ROWTYPE;
+	BEGIN
+		FOR $2 IN $1
+		LOOP
+			${4:-- cod3a}
+		END LOOP;
+	END;
